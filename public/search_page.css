@@ -54,9 +54,22 @@ main div, p, h1, img {
   justify-content: center;
 }
 
-#history {
+#history_content {
   text-align: center;
-  margin: 150px;
+  margin: 50px;
+  font-size: x-large;
+}
+
+#history_content div{
+  margin: 10px;
+}
+
+#history_content button{
+  margin-left: 10px;
+}
+#history_container{
+  text-align: center;
+  margin: 7vw;
   font-size: x-large;
 }
 
@@ -74,6 +87,7 @@ nav {
 
 .left_stuff {
   background-color: gold;
+  display: flex;
 }
 
 nav a {
@@ -112,4 +126,21 @@ footer {
   flex-direction: column;
   height: 100%;
   text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+
+  main,
+  nav,
+  .left_stuff {
+      flex-direction: column;
+  }
+
+  .images_group {
+      width: 100% !important;
+  }
+
+  .search_header {
+    margin-top: 20vh;
+  }
 }

@@ -18,12 +18,12 @@ async function loadNineImages() {
             to_add += `<div class="images_groups">`
         }
 
-        x = Math.floor(Math.random() * 151) + 1
+        x = Math.floor(Math.random() * 2) + 1
 
 
         await $.ajax({
             type: "GET",
-            url: `https://pokeapi.co/api/v2/pokemon/${x}/`,
+            url: `http://localhost:3000/api/v2/pokemon/${x}/`,
             success: processPokeResp
         })
 
