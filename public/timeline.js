@@ -1,6 +1,6 @@
 function loadEvents(){
     $.ajax({
-        url: "http://localhost:5000/timeline/getAllEvents",
+        url: "https://infinite-river-98790.herokuapp.com/timeline/getAllEvents",
         type: "get",
         success: (x)=>{
             console.log(x)
