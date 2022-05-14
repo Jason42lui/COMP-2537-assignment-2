@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const https = require('https');
 const bodyparser = require("body-parser");
+require("dotenv").config()
 app.set('view engine', 'ejs');
 
 app.listen(process.env.PORT || 5000, function (err) {
@@ -10,7 +11,7 @@ app.listen(process.env.PORT || 5000, function (err) {
 
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost:27017/timelineDB",
+mongoose.connect(process.env.DB_COLLECTION,
     { useNewUrlParser: true, useUnifiedTopology: true });
 const eventSchema = new mongoose.Schema({
     text: String,

@@ -23,7 +23,7 @@ async function loadNineImages() {
 
         await $.ajax({
             type: "GET",
-            url: `http://localhost:3000/api/v2/pokemon/${x}/`,
+            url: `https://still-coast-22599.herokuapp.com/api/v2/pokemon/${x}/`,
             success: processPokeResp
         })
 
