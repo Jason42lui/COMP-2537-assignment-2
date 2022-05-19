@@ -3,56 +3,55 @@ abilities_g = " "
 name_g = ' '
 to_add = " "
 function processPokemonResp(data) {
-    for (i = 0; i < data.length; i++) {
-        if (data[i].types[0].type.name == type_g) {
+    for (i = 0; i < data.types.length; i++)
+        if (data.types[i].type.name == type_g) {
             $("main").append(`
             <div class="pokemonBox">
                 <div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data[i].id}.png">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png">
                 </div>
                 <div class="pokemonInfo">
-                    <h1> ID: ${data[i].id} </h1> 
-                    <h1> Name: ${data[i].name} </h1>
-                    <p> Type: ${data[i].types[0].type.name} </p>
-                    <p> Height: ${data[i].height} dm </p>
-                    <p> Weight: ${data[i].weight} hg </p>
+                    <h1> ID: ${data.id} </h1> 
+                    <h1> Name: ${data.name} </h1>
+                    <p> Type: ${data.types[0].type.name} </p>
+                    <p> Height: ${data.height} dm </p>
+                    <p> Weight: ${data.weight} hg </p>
                 </div>
             </div> 
             `)
         }
-    }
 }
 
 function processPokemonResp_abilities(data) {
-    for (i = 0; i < data.length; i++) {
-        if (data[i].abilities[0].ability.name == abilities_g) {
+     for (i = 0; i < data.abilities.length; i++)
+        if (data.abilities[i].ability.name == abilities_g) {
             $("main").append(`
         <div class="pokemonBox">
             <div>
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data[i].id}.png">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png">
             </div>
             <div class="pokemonInfo">
-                <h1> ID: ${data[i].id} </h1> 
-                <h1> Name: ${data[i].name} </h1>
-                <p> Type: ${data[i].types[0].type.name} </p>
-                <p> Height: ${data[i].height} dm </p>
-                <p> Weight: ${data[i].weight} hg </p>
+                <h1> ID: ${data.id} </h1> 
+                <h1> Name: ${data.name} </h1>
+                <p> Type: ${data.types[0].type.name} </p>
+                <p> Height: ${data.height} dm </p>
+                <p> Weight: ${data.weight} hg </p>
             </div>
         </div> 
         `)
         }
-    }
 
 }
-
 
 function display_type(type_) {
     $("main").empty()
     type_g = type_
-    for (i = 1; i < 31; i++) {
+    $("#history").append(`
+    <div class="history_result">Pokemon's Type: ${type_g}</a><button id="delete_pokemon">X</button></div>`)
+    for (i = 1; i < 151; i++) {
         $.ajax({
             type: "get",
-            url: `https://still-coast-22599.herokuapp.com/api/v2/pokemon/ability/${i}`,
+            url: `https://pokeapi.co/api/v2/pokemon/${i}`,
             success: processPokemonResp
         })
     }
@@ -63,10 +62,12 @@ function display_type(type_) {
 function display_abilities(abilities_) {
     $("main").empty()
     abilities_g = abilities_
-    for (i = 1; i < 31; i++) {
+    $("#history").append(`
+    <div class="history_result">Pokemon's Ability: ${abilities_g}</a><button id="delete_pokemon">X</button></div>`)
+    for (i = 1; i < 151; i++) {
         $.ajax({
             type: "get",
-            url: `https://still-coast-22599.herokuapp.com/api/v2/pokemon/type/${i}`,
+            url: `https://pokeapi.co/api/v2/pokemon/${i}`,
             success: processPokemonResp_abilities
         })
     }
@@ -76,14 +77,14 @@ function display_abilities(abilities_) {
 
 function display_name() {
     $("main").empty()
-    name_g = document.getElementById("pokemon_name").value
+    pokeName = document.getElementById("pokemon_name").value
 
     $.ajax(
         {
-            "url": `https://still-coast-22599.herokuapp.com/api/v2/pokemon/${name_g}`,
+            "url": `https://pokeapi.co/api/v2/pokemon/${pokeName}`,
             "type": "GET",
             "success": function (data) {
-                if (name_g == Number(name_g)) {
+                if (pokeName == Number(pokeName)) {
                     alert("Pokemon names are only accepted")
                 } else {
                     $("main").append(`
@@ -100,10 +101,9 @@ function display_name() {
                         </div>
                     </div> 
                     `)
-                    // $("#history_content").append(`
-                    // <div id="history_result_${name_g}"><a href="/profile/${data.id}">Pokemon's Name ${data.name}</a><button class="delete_pokemon">X</button></div>
-                    // `)
-                    $("#history_content").append($(`<div id="history_result_${name_g}"><a href="javascript:display_name()">Pokemon's name: ${data.name}</a><button class="delete_pokemon">X</button></div>`))
+                    $("#history").append(`
+                    <div class="history_result"><a href="/profile/${data.id}">Pokemon's Name ${data.name}</a><button id="delete_pokemon">X</button></div>
+                    `)
                 }
             }
         },

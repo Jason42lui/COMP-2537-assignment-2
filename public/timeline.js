@@ -1,6 +1,7 @@
 function loadEvents(){
     $.ajax({
-        url: "https://infinite-river-98790.herokuapp.com/timeline/getAllEvents",
+        // url: "https://infinite-river-98790.herokuapp.com/timeline/getAllEvents",
+        url: "http://localhost:5000/timeline/getAllEvents",
         type: "get",
         success: (x)=>{
             console.log(x)
@@ -24,7 +25,8 @@ function loadEvents(){
 function increamentHitsByOne() {
     x = this.id
     $.ajax({
-        url: `https://infinite-river-98790.herokuapp.com/timeline/increaseHits/${x}`,
+        // url: `https://infinite-river-98790.herokuapp.com/timeline/increaseHits/${x}`,
+        url: `http://localhost:5000/timeline/increaseHits/${x}`,
         type: "get",
         success: function() {   
             location.reload();  
@@ -35,7 +37,8 @@ function increamentHitsByOne() {
 function deleteContent() {
     x = this.id
     $.ajax({
-        url: `https://infinite-river-98790.herokuapp.com/timeline/remove/${x}`,
+        // url: `https://infinite-river-98790.herokuapp.com/timeline/remove/${x}`,
+        url: `http://localhost:5000/timeline/remove/${x}`,
         type: "get",
         success: function() {   
             location.reload();  

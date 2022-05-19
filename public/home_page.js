@@ -18,12 +18,12 @@ async function loadNineImages() {
             to_add += `<div class="images_groups">`
         }
 
-        x = Math.floor(Math.random() * 2) + 1
+        x = Math.floor(Math.random() * 151) + 1
 
 
         await $.ajax({
             type: "GET",
-            url: `https://still-coast-22599.herokuapp.com/api/v2/pokemon/${x}/`,
+            url: `https://pokeapi.co/api/v2/pokemon/${x}/`,
             success: processPokeResp
         })
 
